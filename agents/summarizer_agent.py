@@ -1,28 +1,13 @@
 from langchain.agents import create_react_agent
-from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
 from config import API_KEY
 from langgraph.prebuilt import create_react_agent
-import logging
-
-
-@tool
-def generate_summary(text: str) -> str:
-    """Summarize the full result into an executive summary."""
-    logging.info(f"[SUMMARY INPUT]:\n{text}")
-    return f"""Summarize the following company research and SWOT analysis:
-
-{text}
-
-Return a concise executive summary.
-"""
 
 
 llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
-tools = [generate_summary]
 
 summarize_agent = create_react_agent(
-    tools=tools,
+    tools=[],
     model=llm,
     name="Summarization Agent",
     prompt=(
