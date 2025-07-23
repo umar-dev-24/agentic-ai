@@ -4,8 +4,11 @@ from langgraph_supervisor import create_supervisor
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from config import API_KEY
+from logs import GeminiTokenLogger
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash", google_api_key=API_KEY, callbacks=[GeminiTokenLogger()]
+)
 
 from agents.research_agent import research_agent
 from agents.analyst_agent import analyse_agent

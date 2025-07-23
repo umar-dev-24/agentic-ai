@@ -4,6 +4,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from config import API_KEY
 from tools.web_search_tool import search_duckduckgo
 from langgraph.prebuilt import create_react_agent
+from logs import GeminiTokenLogger
 
 
 @tool
@@ -12,7 +13,9 @@ def research_company(company: str) -> str:
     return search_duckduckgo(f"{company}")
 
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash", google_api_key=API_KEY, callbacks=[GeminiTokenLogger()]
+)
 tools = [research_company]
 
 research_agent = create_react_agent(

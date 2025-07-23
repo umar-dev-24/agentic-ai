@@ -1,14 +1,12 @@
 from db import mock_db
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
 from config import API_KEY
 from langgraph.prebuilt import create_react_agent
-from db import mock_db
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
-from config import API_KEY
+from logs import GeminiTokenLogger
 
 
 # Tool for DB access
@@ -41,7 +39,9 @@ def db_access(query: str) -> str:
 
 
 # LLM
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash", google_api_key=API_KEY, callbacks=[GeminiTokenLogger()]
+)
 
 # Prompt
 prompt = ChatPromptTemplate.from_messages(

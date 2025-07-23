@@ -2,9 +2,12 @@ from langchain.agents import create_react_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 from config import API_KEY
 from langgraph.prebuilt import create_react_agent
+from logs import GeminiTokenLogger
 
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash", google_api_key=API_KEY, callbacks=[GeminiTokenLogger()]
+)
 
 summarize_agent = create_react_agent(
     tools=[],
