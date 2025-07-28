@@ -40,23 +40,15 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from config import API_KEY, LANGFUSE_BASE_URL, LANGFUSE_SECRET_KEY, LANGFUSE_PUBLIC_KEY
 from tools.web_search_tool import search_duckduckgo
 from langgraph.prebuilt import create_react_agent
-
-
-# ✅ Langfuse imports
 from langfuse import Langfuse
-
-
 from langfuse.langchain import CallbackHandler
 
 langfuse_handler = CallbackHandler()
-
-# ✅ Initialize Langfuse
 langfuse = Langfuse(
     public_key=LANGFUSE_PUBLIC_KEY,
     secret_key=LANGFUSE_SECRET_KEY,
-    host=LANGFUSE_BASE_URL,  # optional unless self-hosted
+    host=LANGFUSE_BASE_URL,
 )
-# langfuse_handler = LangfuseCallbackHandler(langfuse=langfuse)
 
 
 @tool

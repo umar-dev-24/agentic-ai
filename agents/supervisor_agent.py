@@ -3,9 +3,22 @@
 from langgraph_supervisor import create_supervisor
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
-from config import API_KEY
+from config import API_KEY, LANGFUSE_BASE_URL, LANGFUSE_SECRET_KEY, LANGFUSE_PUBLIC_KEY
+from langfuse import Langfuse
+from langfuse.langchain import CallbackHandler
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
+langfuse_handler = CallbackHandler()
+langfuse = Langfuse(
+    public_key=LANGFUSE_PUBLIC_KEY,
+    secret_key=LANGFUSE_SECRET_KEY,
+    host=LANGFUSE_BASE_URL,  # optional unless self-hosted
+)
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash",
+    google_api_key=API_KEY,
+    callbacks=[langfuse_handler],  # ✅ Add callback to log LLM events
+)
 
 from agents.research_agent import research_agent
 from agents.analyst_agent import analyse_agent

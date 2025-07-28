@@ -1,6 +1,6 @@
 # config.py
 
-API_KEY = "YOUR_GOOGLE_API_KEY"
+API_KEY = "AIzaSyArAEub-AaeJBLWGtsnup-8ngj4HUkGGBs"
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 LANGFUSE_BASE_URL = "https://cloud.langfuse.com"
 LANGFUSE_SECRET_KEY = "sk-lf-aaa50ee2-d70b-4bb5-82b1-9abdaa6746d9"
