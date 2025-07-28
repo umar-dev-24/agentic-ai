@@ -5,3 +5,4 @@ duckduckgo-search
 streamlit
 langgraph
 langgraph-supervisor
+langfuse>=2.0.0
