@@ -11,7 +11,7 @@
 #         return draft
 
 from duckduckgo_search import DDGS
-from browse import check_url_with_google_safebrowsing
+from safe_browser import check_url_with_google_safebrowsing
 
 
 def search_duckduckgo(query: str, max_results: int = 10) -> str:
