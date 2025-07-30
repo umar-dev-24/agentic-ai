@@ -15,7 +15,6 @@ from config import API_KEY
 @tool
 def db_access(query: str) -> str:
     """Access internal company database. Can return employees, salary, projects, or revenue."""
-    print(f"[DB AGENT TOOL] Received query: {query} (type: {type(query)})")
     company = None
     for c in mock_db.keys():
         if c.lower() in str(query).lower():
