@@ -7,7 +7,6 @@ st.set_page_config(page_title="Agentic Company Analyzer", layout="centered")
 st.title("🤖 Agentic AI: Company Analyzer")
 
 company = st.text_input("Enter a company name")
-print("Company Name:", company.strip())
 if st.button("Analyze") and company.strip():
     with st.spinner("Agents are working..."):
         try:
