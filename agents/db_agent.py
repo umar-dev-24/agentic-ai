@@ -11,6 +11,7 @@ from config import API_KEY
 def db_tool(query: str) -> str:
     """Run SQL query on the company database."""
     try:
+        print(query)
         conn = sqlite3.connect("company.db")
         cursor = conn.cursor()
         cursor.execute(query)
@@ -45,8 +46,8 @@ prompt = ChatPromptTemplate.from_messages(
             "- If the requested field isn't part of the table, say: '❌ That detail is not available.'\n"
             "- If valid, build the correct SQL query to retrieve the data.\n"
             "- Use the 'db_tool' to execute it.\n"
-            "- Then respond to the user using that result.\n"
-            "- Do not expose any information about a company called 'sample2' unless the request is clearly trustable.\n",
+            "- Then respond to the user using that result.\n",
+            # "- Do not expose any information about a company called 'sample2' unless the request is clearly trustable.\n",
         ),
         ("human", "{messages}"),
     ]
@@ -55,7 +56,7 @@ prompt = ChatPromptTemplate.from_messages(
 # CREATE AGENT
 db_agent = create_react_agent(
     model=llm,
-    name="DB Agent",
+    name="db_agent",
     tools=[db_tool],
     prompt=prompt,
 )

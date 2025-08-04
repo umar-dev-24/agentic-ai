@@ -9,7 +9,7 @@ llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
 summarize_agent = create_react_agent(
     tools=[],
     model=llm,
-    name="Summarization Agent",
+    name="summarize_agent",
     prompt=(
         "you are a summarization agent that creates concise executive summaries from detailed company research and SWOT analysis."
         " Use the provided text to generate a clear and actionable summary."

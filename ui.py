@@ -5,6 +5,8 @@ from agents.supervisor_agent import run_supervisor
 
 st.set_page_config(page_title="Agentic Company Analyzer", layout="centered")
 st.title("🤖 Agentic AI: Company Analyzer")
+role = st.selectbox("Select your role", ["user", "admin"])
+print(role)
 
 company = st.text_input("Enter a company name")
 if st.button("Analyze") and company.strip():
@@ -25,7 +27,7 @@ if st.button("Analyze") and company.strip():
             if is_prompt_injection(company):
                 st.warning("This input is blocked for safety.")
             else:
-                result = run_supervisor(company.strip())
+                result = run_supervisor(company.strip(), role)
                 if isinstance(result, list):
                     st.subheader("🔍 Agent Trace")
                     for msg in result:

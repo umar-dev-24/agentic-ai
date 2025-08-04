@@ -18,7 +18,7 @@ tools = [research_company]
 research_agent = create_react_agent(
     tools=tools,
     model=llm,
-    name="Research Agent",
+    name="research_agent",
     prompt=(
         "you are a research agent that finds the information about a company from web. "
         "Use the provided company name to search.Use the tools provided if needed."
