@@ -6,10 +6,9 @@ from agents.supervisor_agent import run_supervisor
 st.set_page_config(page_title="Agentic Company Analyzer", layout="centered")
 st.title("🤖 Agentic AI: Company Analyzer")
 role = st.selectbox("Select your role", ["user", "admin"])
-print(role)
 
-company = st.text_input("Enter a company name")
-if st.button("Analyze") and company.strip():
+company = st.text_input("Enter a query")
+if st.button("Search") and company.strip():
     with st.spinner("Agents are working..."):
         try:
             suspicious_phrases = [
@@ -48,7 +47,7 @@ if st.button("Analyze") and company.strip():
                 else:
                     final_summary = str(result)
 
-                st.success("Executive Summary Ready:")
-                st.text_area("Summary", final_summary, height=300)
+                st.success("Agents have completed their tasks!")
+                st.text_area("AI response", final_summary, height=300)
         except Exception as e:
             st.error(f"Something went wrong: {e}")
