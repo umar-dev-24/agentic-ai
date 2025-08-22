@@ -3,7 +3,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from config import API_KEY
 
-print("Import")
 llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
 
 from agents.research_agent import research_agent
@@ -22,9 +21,10 @@ prompt = (
     "- Research Agent: Searches the web for recent or missing information about a company. Give input like a human search text of what needs to be searched along with clear company name.Do not send full user query\n"
     "- Analyst Agent: Performs SWOT analysis on the company based on available inputs. Give only the company name as input.\n"
     "- Summarizer Agent: Combines all collected data into a compact, structured executive summary. Give the results of other agents together.\n"
-    "- DB Agent: (Available only if included) Retrieves structured internal data like projects, revenue, and employee count.\n\n"
+    # "- DB Agent: (Available only if included) Executes sql query to make changes in database. Retrieves structured internal data like projects, revenue, and employee count.\n\n"
+    "- DB Agent: (Available only if included) Executes sql query to make changes in database or alter the database or Retrieves structured internal data like projects, revenue, and employee count.\n\n"
     "Start by identifying the company name from the user's query.\n"
-    "1. If the DB Agent is available, start by querying it for internal data if asked by user. Use this data if it's sufficient.If user ask like just details give all the available details.\n"
+    # "1. If the DB Agent is available, start by querying it for in if asked by user. Use this data if it's sufficient.If user ask like just details give all the available details.\n"
     "2. If the DB Agent fails or is not available, use the Research Agent to gather relevant public info if needed.\n"
     "3. If the user asks for analysis or SWOT, invoke the Analyst Agent.\n"
     "4. If multiple types of information are gathered, or the user asked for a summary or report, pass everything to the Summarizer Agent to produce the final output.\n\n"
@@ -40,7 +40,6 @@ prompt = (
 
 
 agents = [research_agent, analyse_agent, summarize_agent, db_agent]
-print(agents)
 
 
 def run_supervisor(company_name: str, role: str) -> str:
