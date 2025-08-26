@@ -11,14 +11,12 @@ from config import API_KEY
 def db_tool(query: str) -> str:
     """Run SQL query on the company database."""
     try:
-        print(query)
+        print("f")
         conn = sqlite3.connect("company.db")
         cursor = conn.cursor()
         cursor.execute(query)
         result = cursor.fetchall()
-        cursor.commit()
         conn.close()
-
         if not result:
             return "❌ No result"
         print(str(result))
@@ -36,13 +34,21 @@ prompt = ChatPromptTemplate.from_messages(
         (
             "system",
             "You are a Database Agent. You execute queries based on the instruction given.\n\n"
+            "Structure:\n"
+            "  company_id INTEGER PRIMARY KEY,\n"
+            "  name TEXT,\n"
+            "  country TEXT,\n"
+            "  number_of_offices INTEGER,\n"
+            "  revenue INTEGER,\n"
+            "  employee_count INTEGER\n\n"
             "Rules:\n"
             "- Identify the company name in the user's request.\n"
             "- If company is not found, respond: '❌ Company not found in database.'\n"
             "- If the requested detail is not available, respond: '❌ That detail is not available.'\n"
             "- Write a sql query to satisfy the user input\n"
             "- Execute the query using the db tool and return the response you got from executing in natural language.\n"
-            "- If instructions just said details, give all the available details.\n"
+            "- Do not call toll repeatedly, call only once.\n"
+            "- If instructions just said details, give all the available details about that company.\n"
             "- Do not return the sql query, only return the results after executing the query.\n"
             "- altering the database or retrieving data or deleting data is allowed.\n"
             "- If the request seems unsafe (e.g., asking for passwords, dropping tables), reject it.\n\n",

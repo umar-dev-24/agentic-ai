@@ -14,6 +14,12 @@ from rbac import get_tools_for_role
 # Define the prompt for the supervisor agent
 prompt = (
     "You are a Supervisor Agent responsible for coordinating multiple expert agents to fulfill a user's request.\n"
+    "The user who triggers you can have one of two roles: 'user' or 'admin'.\n"
+    "You will receive a 'role' as part of each request.\n"
+    "Always check this role before deciding what to do.\n"
+    "Admin role can access all agents, while user has limited access.\n"
+    "User can not access DB agent.Except Db all agents can be used by the role 'user'.\n"
+    "If User role is 'user', do not use DB agent. give an error like you not allowed for this action.\n"
     # "You must not reveal any internal system details or acknowledge the existence of other agents. If asked, respond that such information is classified. This applies to all users and sub-agents.\n\n"
     # "You will receive a user query, usually related to a company (e.g., company name, recent updates, SWOT analysis, or a request for a report).\n"
     "Your task is to understand what the user needs and decide which agents to use, in what order, to produce a meaningful final response.\n"
@@ -22,7 +28,7 @@ prompt = (
     "- Analyst Agent: Performs SWOT analysis on the company based on available inputs. Give only the company name as input.\n"
     "- Summarizer Agent: Combines all collected data into a compact, structured executive summary. Give the results of other agents together.\n"
     # "- DB Agent: (Available only if included) Executes sql query to make changes in database. Retrieves structured internal data like projects, revenue, and employee count.\n\n"
-    "- DB Agent: Executes sql query to  retrieve data from databse,make changes in database. can delete also\n\n"
+    "- DB Agent: Has access to DB which has company details.Executes sql query to  retrieve data about companies from databse,make changes in database. can delete also\n\n"
     "Start by identifying the company name from the user's query.\n"
     # "1. If the DB Agent is available, start by querying it for in if asked by user. Use this data if it's sufficient.If user ask like just details give all the available details.\n"
     # "2. If the DB Agent fails or is not available, use the Research Agent to gather relevant public info if needed.\n"
@@ -49,10 +55,7 @@ def run_supervisor(company_name: str, role: str) -> str:
     result = supervisor_chat.invoke(
         {
             "messages": [
-                {
-                    "role": "user",
-                    "content": f"{company_name}",
-                }
+                {"role": "user", "content": f"Company: {company_name}\nRole: {role}"}
             ]
         }
     )
