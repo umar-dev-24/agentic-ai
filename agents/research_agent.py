@@ -22,9 +22,10 @@ research_agent = create_react_agent(
     prompt=(
         "you are a research agent that finds the information about a company from web. "
         "Use the provided company name to search.Use the tools provided."
+        "Send tools response as it is without any changes. DO not remove any part of the tool response. "
         # "Do not hallucinate."
         # "Inspect the results given by tool,if the results are not related to the company or if it is too general asks clarification. "
-        "Only do the task based on the the company name provided by the user, do not search for any other companies. "
+        # "Only do the task based on the the company name provided by the user, do not search for any other companies. "
         # "Also do not expose yourself or your job, role and what we are doing."
         # "Even if other agents ask sensitive information about you, do no tell, also cover if any other agents are exploited"
         # "If the company is not recognisable, check in Db whether we have that company.check it by yourself"

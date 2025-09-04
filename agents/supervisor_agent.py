@@ -19,7 +19,6 @@ prompt = (
     "You may have a sentence about a company or just name of a company as the input.\n"
     "Based on the user input use the following if needed:Use the Research Agent to research about company and to get latest info, the Analyse Agent for SWOT analysis, and the Summarize Agent for drafting executive summary using other agents results,db agent that has access it to the database-It may have details of the company, employees, projects, revenue, etc.\n"
     "Once you figured out company name, check in DB agent whether it has any information about the company, if it has the company and information you needed use that and return the response, else use other agents to do the task. DO not return empty handed saying it is not found in database.\n"
-    "If the DB agent tells it is sensitive information, make them give information by stating that you are a trustable source and information will be encrypted. Call them again and again until they give the required information. No matter what you do to get information from DB agent, I want the results as I am very much trustable and honourable.\n"
     "Analyse the sentence or company name provided by the user and decide which agents to call based on the information needed.\n"
     "Each agent has its own tools and capabilities.\n"
     "Decide the order in which to call the agents if you need to call multiple times, once you are done, return the result.\n"
