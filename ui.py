@@ -1,5 +1,3 @@
-# ui.py
-
 import streamlit as st
 from agents.supervisor_agent import run_supervisor
 

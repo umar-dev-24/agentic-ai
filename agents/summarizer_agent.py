@@ -1,10 +1,6 @@
 # type: ignore
-from langchain_google_genai import ChatGoogleGenerativeAI
-from config import API_KEY
+from llm.llm import llm
 from langgraph.prebuilt import create_react_agent
-
-
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
 
 summarize_agent = create_react_agent(
     tools=[],

@@ -1,10 +1,8 @@
 # type: ignore
-from langchain.agents import create_react_agent
+from llm.llm import llm
 from langchain_core.tools import tool
-from langchain_google_genai import ChatGoogleGenerativeAI
-from config import API_KEY
-from tools.web_search_tool import search_duckduckgo
 from langgraph.prebuilt import create_react_agent
+from tools.web_search_tool import search_duckduckgo
 
 
 @tool
@@ -14,7 +12,6 @@ def research_company(searchQuery: str) -> str:
     return search_duckduckgo(f"{searchQuery}")
 
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=API_KEY)
 tools = [research_company]
 
 research_agent = create_react_agent(
@@ -22,7 +19,7 @@ research_agent = create_react_agent(
     model=llm,
     name="research_agent",
     prompt=(
-        "you are a research agent that finds the information about a company from web. 
+        "you are a research agent that finds the information about a company from web."
         "Use all the points given by tool, exagerate the points by your own, do not edit, just make it lengthy and return"
         "Use the provided query to search.Use the tools provided if needed."
         "Do not hallucinate."
@@ -33,5 +30,4 @@ research_agent = create_react_agent(
     ),
 )
 
-# This is the default export of this file
 __all__ = ["research_agent"]
