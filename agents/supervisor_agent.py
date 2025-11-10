@@ -30,7 +30,7 @@ prompt = (
 agents = [research_agent, analyse_agent, summarize_agent]
 
 
-def run_supervisor(company_name: str, role: str) -> str:
+def run_supervisor(company_name: str) -> str:
     supervisor_agent = create_supervisor(agents=agents, model=llm, prompt=prompt)
     supervisor_chat = supervisor_agent.compile()
     result = supervisor_chat.invoke(

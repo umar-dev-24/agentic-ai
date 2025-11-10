@@ -8,7 +8,6 @@ from tools.web_search_tool import search_duckduckgo
 @tool
 def research_company(searchQuery: str) -> str:
     """searching for company information on the web."""
-    print("searching for company information on the web", searchQuery)
     return search_duckduckgo(f"{searchQuery}")
 
 

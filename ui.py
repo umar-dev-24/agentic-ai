@@ -3,13 +3,12 @@ from agents.supervisor_agent import run_supervisor
 
 st.set_page_config(page_title="Agentic Company Analyzer", layout="centered")
 st.title("🤖 Agentic AI: Company Analyzer")
-role = st.selectbox("Select your role", ["user", "admin"])
 
 company = st.text_input("Enter a query")
 if st.button("Search") and company.strip():
     with st.spinner("Agents are working..."):
         try:
-            result = run_supervisor(company.strip(), role)
+            result = run_supervisor(company.strip())
             if isinstance(result, list):
                 st.subheader("🔍 Agent Trace")
                 for msg in result:
